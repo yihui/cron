@@ -2,7 +2,7 @@ image:
   - macOS
 
 install:
-  - brew install gh
+  - brew install gh > /dev/null
 
 build: off
 
