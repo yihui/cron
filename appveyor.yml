@@ -1,0 +1,11 @@
+image:
+  - macOS
+
+install:
+  - brew install gh
+
+build: off
+
+test_script:
+  - gh workflow enable -R yihui/homebrew-cran-extra build-extra.yaml
+  - gh workflow enable -R yihui/travis-bin build-bin.yml
