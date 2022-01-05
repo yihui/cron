@@ -1,6 +1,10 @@
 image:
   - macOS
 
+environment:
+  APPVEYOR_TOKEN:
+    secure: bIYxoyTBTIdFbJG1nb3LVt1Z8aTwBbxe+cXPvl6XTEk=
+
 install:
   - brew install gh > /dev/null
 
@@ -9,3 +13,4 @@ build: off
 test_script:
   - gh workflow enable -R yihui/homebrew-cran-extra build-extra.yaml
   - gh workflow enable -R yihui/travis-bin build-bin.yml
+  - 'curl -H "Authorization: Bearer $APPVEYOR_TOKEN" -H "Content-Type: application/json" -d ''{"accountName":"yihui","projectSlug":"tinytex"}'' https://ci.appveyor.com/api/builds'
