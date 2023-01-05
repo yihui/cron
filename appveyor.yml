@@ -9,3 +9,4 @@ build: off
 test_script:
   - gh workflow enable -R yihui/travis-bin build-bin.yml
   - gh workflow enable -R yihui/crandalf rev-check.yaml
+  - gh workflow enable -R yihui/crandalf cloud-check.yaml
