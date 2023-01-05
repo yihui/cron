@@ -1,0 +1,34 @@
+on:
+  schedule:
+    - cron: '0 6 * * * '
+
+name: cron
+
+jobs:
+  enable:
+    runs-on: macOS-latest
+
+    name: Enable GHA 
+
+    steps:
+      - uses: actions/checkout@HEAD
+
+      - name: Enable GHA
+        run: |
+          brew install gh
+          gh workflow enable -R yihui/travis-bin build-bin.yml
+          gh workflow enable -R yihui/crandalf rev-check.yaml
+
+      - name: Keep myself alive every month
+        run: |
+          [ $(date '+%d') != '01' ] && exit 0 || true
+          if [ -f dummy.txt ]; then
+            rm dummy.txt
+          else
+            touch dummy.txt
+          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "dummy change"
+          git push
