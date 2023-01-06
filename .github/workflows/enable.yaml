@@ -4,6 +4,9 @@ on:
 
 name: cron
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
   enable:
     runs-on: macOS-latest
@@ -15,7 +18,6 @@ jobs:
 
       - name: Enable GHA
         run: |
-          brew install gh
           gh workflow enable -R yihui/travis-bin build-bin.yml
           gh workflow enable -R yihui/crandalf rev-check.yaml
           gh workflow enable -R yihui/crandalf cloud-check.yaml
