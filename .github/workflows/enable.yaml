@@ -5,7 +5,7 @@ on:
 name: cron
 
 env:
-  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.CRON_TOKEN }}
 
 jobs:
   enable:
