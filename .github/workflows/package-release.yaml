@@ -1,0 +1,22 @@
+# biweekly reminder on which packages can be released to CRAN
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 1,15 * *'
+
+name: package-release
+
+jobs:
+  package-release:
+    runs-on: macOS-latest
+
+    name: Release reminder
+
+    steps:
+      - uses: actions/checkout@HEAD
+
+      - uses: r-lib/actions/setup-r@HEAD
+        with:
+          use-public-rspm: true
+
+      - run: Rscript release.R
