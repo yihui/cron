@@ -20,6 +20,7 @@ jobs:
         with:
           path: yihui.org
           repository: yihui/yihui.org
+          submodules: recursive
 
       - name: Extract characters
         run: |
