@@ -23,18 +23,22 @@ jobs:
 
       - name: Extract characters
         run: |
+          sudo apt-get -qq install -y fonttools hugo
           mkdir -p fonts
           find yihui.org -name '*.md' -exec grep -o -P '[\x{4E00}-\x{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
+          cd yihui.org
+          hugo
+          find public -name '*.html' -exec cat {} | xargs | grep -o -P '<blockquote>.+?</blockquote>' | grep -o -P '[\x{4E00}-\x{9FFF}]' \; | sort | uniq > ../fonts/chars2.txt
+          cd ..
 
       - name: Build fonts
         run: |
-          sudo apt-get -qq install -y fonttools
           export FONT_NAME=SourceHanSerifCN-Regular
           wget -nv https://github.com/adobe-fonts/source-han-serif/raw/release/SubsetOTF/CN/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=FandolKai-Regular
           wget -nv https://mirrors.ctan.org/fonts/fandol/${FONT_NAME}.otf
-          pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars2.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
 
       - name: Push fonts
         run: |
