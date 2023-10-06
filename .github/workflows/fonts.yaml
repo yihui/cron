@@ -32,6 +32,9 @@ jobs:
           export FONT_NAME=SourceHanSerifCN-Regular
           wget -nv https://github.com/adobe-fonts/source-han-serif/raw/release/SubsetOTF/CN/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          export FONT_NAME=FandolKai-Regular
+          wget -nv https://mirrors.ctan.org/fonts/fandol/${FONT_NAME}.otf
+          pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
 
       - name: Push fonts
         run: |
