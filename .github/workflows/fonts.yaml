@@ -1,0 +1,40 @@
+# create subsets of fonts for my website
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * * '
+
+name: fonts
+
+jobs:
+  enable:
+    runs-on: ubuntu-latest
+
+    name: Create fonts
+
+    steps:
+      - uses: actions/checkout@HEAD
+
+      - name: Checkout yihui.org
+        uses: actions/checkout@HEAD
+        with:
+          path: yihui.org
+          repository: yihui/yihui.org
+        run: |
+          mkdir -p fonts
+          find yihui.org -name '*.md' -exec grep -o -P '[\U{4E00}-\U{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
+
+      - name: Build fonts
+        run: |
+          sudo apt-get install -y fonttools
+          export FONT_NAME=SourceHanSerifCN-Regular
+          wget https://github.com/adobe-fonts/source-han-serif/raw/release/SubsetOTF/CN/${FONT_NAME}.otf
+          pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+
+      - name: Push fonts
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add fonts/*
+          git commit -m "update fonts"
+          git push
