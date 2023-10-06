@@ -22,9 +22,12 @@ jobs:
           repository: yihui/yihui.org
           submodules: recursive
 
-      - name: Extract characters
+      - name: Install packages
         run: |
           sudo apt-get -qq install -y fonttools hugo
+
+      - name: Extract characters
+        run: |
           mkdir -p fonts
           find yihui.org -name '*.md' -exec grep -o -P '[\x{4E00}-\x{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
           cd yihui.org
