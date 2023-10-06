@@ -20,6 +20,8 @@ jobs:
         with:
           path: yihui.org
           repository: yihui/yihui.org
+
+      - name: Extract characters
         run: |
           mkdir -p fonts
           find yihui.org -name '*.md' -exec grep -o -P '[\U{4E00}-\U{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
