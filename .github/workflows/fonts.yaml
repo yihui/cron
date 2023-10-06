@@ -28,7 +28,7 @@ jobs:
 
       - name: Build fonts
         run: |
-          sudo apt-get install -y fonttools
+          sudo apt-get -qq install -y fonttools
           export FONT_NAME=SourceHanSerifCN-Regular
           wget -nv https://github.com/adobe-fonts/source-han-serif/raw/release/SubsetOTF/CN/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
