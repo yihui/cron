@@ -40,8 +40,8 @@ jobs:
           wget -nv https://mirrors.ctan.org/fonts/fandol/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=AR-PL-KaitiM-GB
-          wget -nv https://db.onlinewebfonts.com/t/157c7e79f7f057bbeacf5f113b964875.woff2 -o ${FONT_NAME}.woff2
-          pyftsubset ${FONT_NAME}.woff2 --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          wget -nv https://db.onlinewebfonts.com/t/157c7e79f7f057bbeacf5f113b964875.woff -o ${FONT_NAME}.woff
+          pyftsubset ${FONT_NAME}.woff --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
 
       - name: Push fonts
         run: |
