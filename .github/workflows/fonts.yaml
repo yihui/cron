@@ -31,6 +31,9 @@ jobs:
           mkdir -p fonts
           find yihui.org -name '*.md' -exec grep -o -P '[\x{4E00}-\x{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@HEAD
+
       - name: Build fonts
         run: |
           export FONT_NAME=SourceHanSerifCN-Regular
