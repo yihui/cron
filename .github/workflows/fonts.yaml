@@ -31,9 +31,6 @@ jobs:
           mkdir -p fonts
           find yihui.org -name '*.md' -exec grep -o -P '[\x{4E00}-\x{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@HEAD
-
       - name: Build fonts
         run: |
           export FONT_NAME=SourceHanSerifCN-Regular
@@ -43,8 +40,8 @@ jobs:
           wget -nv https://mirrors.ctan.org/fonts/fandol/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=AR-PL-KaitiM-GB
-          wget -nv https://db.onlinewebfonts.com/t/157c7e79f7f057bbeacf5f113b964875.ttf -o ${FONT_NAME}.ttf
-          pyftsubset ${FONT_NAME}.ttf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          wget -nv https://db.onlinewebfonts.com/t/157c7e79f7f057bbeacf5f113b964875.woff2 -O ${FONT_NAME}.woff2
+          pyftsubset ${FONT_NAME}.woff2 --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
 
       - name: Push fonts
         run: |
