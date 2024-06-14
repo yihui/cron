@@ -37,7 +37,7 @@ jobs:
           wget -nv https://github.com/adobe-fonts/source-han-serif/raw/release/SubsetOTF/CN/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=FandolKai-Regular
-          wget -nv https://mirrors.ctan.org/fonts/fandol/${FONT_NAME}.otf
+          wget -nv https://mirrors.tuna.tsinghua.edu.cn/CTAN/fonts/fandol/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=AR-PL-KaitiM-GB
           wget -nv https://db.onlinewebfonts.com/t/157c7e79f7f057bbeacf5f113b964875.woff2 -O ${FONT_NAME}.woff2
