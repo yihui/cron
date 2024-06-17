@@ -42,6 +42,9 @@ jobs:
           export FONT_NAME=AR-PL-KaitiM-GB
           wget -nv https://db.onlinewebfonts.com/t/157c7e79f7f057bbeacf5f113b964875.woff2 -O ${FONT_NAME}.woff2
           pyftsubset ${FONT_NAME}.woff2 --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          export FONT_NAME=AR-PL-KaitiM-Big5
+          wget -nv https://raw.githubusercontent.com/chuxinyuan/ARPL/main/${FONT_NAME}.ttf -O ${FONT_NAME}.ttf
+          pyftsubset ${FONT_NAME}.ttf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
 
       - name: Push fonts
         run: |
