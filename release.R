@@ -3,6 +3,7 @@ install.packages('xfun', repos = 'https://yihui.r-universe.dev')
 if (dir.exists('package')) xfun::in_dir('package', {
   # release this package
   xfun:::install_deps()
+  xfun::pkg_load2('curl')
   x = xfun::read_utf8(f <- 'DESCRIPTION')
   i = grep('^Version: ', x)
   v = sub('^Version: (\\d+\\.\\d+).*', '\\1', x[i])
