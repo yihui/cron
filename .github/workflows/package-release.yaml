@@ -1,6 +1,11 @@
 # biweekly reminder on which packages can be released to CRAN
 on:
   workflow_dispatch:
+    inputs:
+      pkg_repo:
+        description: 'Github repo of the form user/repo'
+        required: false
+        type: string
   schedule:
     - cron: '0 6 1,15 * *'
 
@@ -15,8 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@HEAD
 
+      - uses: actions/checkout@HEAD
+        if: github.event.inputs.pkg_repo != ''
+        with:
+          path: package
+          repository: ${{ github.event.inputs.pkg_repo }}
+
       - uses: r-lib/actions/setup-r@HEAD
         with:
+          r-version: devel
+          http-user-agent: release
           use-public-rspm: true
 
       - run: Rscript release.R
