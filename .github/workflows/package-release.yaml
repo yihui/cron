@@ -7,7 +7,7 @@ on:
         required: false
         type: string
       use_pandoc:
-        description: 'Whether to use Pandoc'
+        description: 'Install Pandoc'
         default: false
         type: boolean
   schedule:
@@ -19,7 +19,7 @@ jobs:
   package-release:
     runs-on: macOS-latest
 
-    name: Release reminder
+    name: Release reminder ${{ github.event.inputs.pkg_repo }}
 
     steps:
       - uses: actions/checkout@HEAD
