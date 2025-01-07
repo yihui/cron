@@ -6,6 +6,10 @@ on:
         description: 'Github repo of the form user/repo'
         required: false
         type: string
+      use_pandoc:
+        description: 'Whether to use Pandoc'
+        default: false
+        type: boolean
   schedule:
     - cron: '0 6 1,15 * *'
 
@@ -25,6 +29,9 @@ jobs:
         with:
           path: package
           repository: ${{ github.event.inputs.pkg_repo }}
+
+      - uses: r-lib/actions/setup-pandoc@HEAD
+        if: github.event.inputs.use_pandoc
 
       - uses: r-lib/actions/setup-r@HEAD
         with:
