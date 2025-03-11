@@ -6,6 +6,10 @@ on:
         description: 'Github repo of the form user/repo'
         required: false
         type: string
+      major_release:
+        description: 'Major release'
+        default: false
+        type: boolean
       use_pandoc:
         description: 'Install Pandoc'
         default: false
@@ -39,4 +43,4 @@ jobs:
           http-user-agent: release
           use-public-rspm: true
 
-      - run: Rscript release.R
+      - run: Rscript release.R ${{ github.event.inputs.major_release }}

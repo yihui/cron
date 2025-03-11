@@ -8,7 +8,10 @@ if (dir.exists('package')) xfun::in_dir('package', {
   i = grep('^Version: ', x)
   v = sub('^Version: (\\d+\\.\\d+).*', '\\1', x[i])
   v = as.integer(strsplit(v, '.', fixed = TRUE)[[1]])
-  v[2] = v[2] + 1
+  if (identical(tolower(commandArgs(TRUE)), 'true')) {
+    v[1] = v[1] + 1  # bump major version
+    v[2] = 0
+  } else v[2] = v[2] + 1
   v = paste(v, collapse = '.')
   x[i] = paste('Version:', v)
   xfun::write_utf8(x, f)
