@@ -21,6 +21,7 @@ jobs:
         run: |
           gh workflow enable -R yihui/crandalf rev-check.yaml
           gh workflow enable -R yihui/crandalf cloud-check.yaml
+          gh workflow enable -R yihui/mime update-mimemap.yml
 
       - name: Keep myself alive every month
         run: |
