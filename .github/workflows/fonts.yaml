@@ -29,7 +29,7 @@ jobs:
       - name: Extract characters
         run: |
           mkdir -p fonts
-          find yihui.org -name '*.md' -exec grep -o -P '[\x{4E00}-\x{9FFF}]' {} \; | sort | uniq > fonts/chars.txt
+          find yihui.org -name '*.md' -exec grep -o -P '[\x{4E00}-\x{9FFF}\x{2000}-\x{206F}\x{3000}-\x{303F}\x{FF00}-\x{FFEF}]' {} \; | sort | uniq > fonts/chars.txt
 
       - name: Build fonts
         run: |
