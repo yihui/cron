@@ -54,6 +54,6 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add fonts/*
-          git commit -m "update fonts" && ./fonts/purge.sh || true
+          git commit -m "update fonts" && ./fonts/purge.sh || exit 0
           git tag v$(date +%Y.%m.%d) || true
           git push --tags origin main || true
