@@ -54,4 +54,5 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add fonts/*
-          git commit -m "update fonts" && git push || true
+          git tag $(date +%Y.%m.%d) || true
+          git commit -m "update fonts" && git push origin --tags || true

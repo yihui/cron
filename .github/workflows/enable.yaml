@@ -26,13 +26,7 @@ jobs:
       - name: Keep myself alive every month
         run: |
           [ $(date '+%d') != '01' ] && exit 0 || true
-          if [ -f dummy.txt ]; then
-            rm dummy.txt
-          else
-            touch dummy.txt
-          fi
+          git tag $(date +%Y.%m.%d) || true
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add .
-          git commit -m "dummy change"
-          git push
+          git push origin --tags
