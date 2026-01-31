@@ -47,9 +47,8 @@ jobs:
           pyftsubset ${FONT_NAME}.ttf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=bkai00mp
           wget -nv https://mirrors.tuna.tsinghua.edu.cn/CTAN/fonts/arphic-ttf/${FONT_NAME}.ttf -O ${FONT_NAME}.ttf
-          python3 -c "f1=open('fonts/chars.txt').read(); f2=open('fonts/chars-t.txt').read(); open('chars-c.txt','w').write(''.join(set(f1)&set(f2)))"
-          cat chars-c.txt
-          pyftsubset ${FONT_NAME}.ttf --text-file=chars-c.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          python3 fonts/big5.py
+          pyftsubset ${FONT_NAME}.ttf --text-file=big5.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
 
       - name: Push fonts
         run: |
