@@ -24,6 +24,6 @@ def generate_fallback_list(font_path, input_file, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("".join(missing))
 
-    print(f" Missing:    {missing}")
+    print(f" Missing: {missing}")
 
 generate_fallback_list('gkai00mp.ttf', 'fonts/chars.txt', 'big5.txt')
