@@ -39,7 +39,6 @@ jobs:
 
       - uses: r-lib/actions/setup-r@HEAD
         with:
-          r-version: devel
           http-user-agent: release
           use-public-rspm: true
 
