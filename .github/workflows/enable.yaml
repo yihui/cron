@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * * '
+    - cron: '0 6 1 * * '
 
 name: cron
 
@@ -17,15 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@HEAD
 
-      - name: Enable GHA
-        run: |
-          gh workflow enable -R yihui/crandalf rev-check.yaml
-          gh workflow enable -R yihui/crandalf cloud-check.yaml
-          gh workflow enable -R yihui/mime update-mimemap.yml
-
       - name: Keep myself alive every month
         run: |
-          [ $(date '+%d') != '01' ] && exit 0 || true
           git tag v$(date +%Y.%m.%d) || true
           git config user.name github-actions
           git config user.email github-actions@github.com
