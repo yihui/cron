@@ -23,9 +23,7 @@ jobs:
           submodules: recursive
 
       - name: Install packages
-        run: |
-          sudo apt-get update
-          sudo apt-get -qq install -y fonttools > /dev/null
+        run: pip install -q fonttools brotli
 
       - name: Extract characters
         run: |
@@ -36,7 +34,8 @@ jobs:
         run: |
           export FONT_NAME=SourceHanSerifCN-Regular
           wget -nv https://github.com/adobe-fonts/source-han-serif/raw/release/SubsetOTF/CN/${FONT_NAME}.otf
-          pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
+          python3 fonts/calt.py ${FONT_NAME}.otf ${FONT_NAME}-calt.otf
+          pyftsubset ${FONT_NAME}-calt.otf --text-file=fonts/chars.txt --unicodes=U+0020-007F --no-hinting --flavor=woff2 --layout-features+=calt --output-file=fonts/${FONT_NAME}-yihui.woff2
           export FONT_NAME=FandolKai-Regular
           wget -nv https://mirrors.tuna.tsinghua.edu.cn/CTAN/fonts/fandol/${FONT_NAME}.otf
           pyftsubset ${FONT_NAME}.otf --text-file=fonts/chars.txt --no-hinting --flavor=woff2 --output-file=fonts/${FONT_NAME}-yihui.woff2
