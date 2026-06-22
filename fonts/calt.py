@@ -88,17 +88,15 @@ def _build_fea(cjk_glyphs, full_glyphs, prop_glyphs):
 @PROP = [{prop_class}];
 @FULL = [{full_class}];
 
-feature calt {{
-    # After CJK: use full-width
-    lookup prop_to_full {{
-        sub @PROP by @FULL;
-    }} prop_to_full;
+lookup prop_to_full {{
+    sub @PROP by @FULL;
+}} prop_to_full;
 
+feature calt {{
     lookup after_cjk {{
         sub @CJK @PROP' lookup prop_to_full;
     }} after_cjk;
 
-    # Before CJK: use full-width
     lookup before_cjk {{
         sub @PROP' lookup prop_to_full @CJK;
     }} before_cjk;
